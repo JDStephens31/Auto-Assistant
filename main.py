@@ -83,7 +83,7 @@ def run_alexa():
             cmd = cmd.strip()
 
             talk("Messaging " + cmd)
-            with open('contact.json') as f:
+            with open('Data/contact.json') as f:
                 data = json.load(f)
             try:
                 link = data['Contacts'][cmd]['link']
