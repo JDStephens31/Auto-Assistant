@@ -75,6 +75,10 @@ def run_alexa():
         elif 'message' in command:
             cmd = command.replace('message', '')
             cmd = cmd.strip()
+<<<<<<< Updated upstream
+=======
+            talk("Messaging " + cmd)
+>>>>>>> Stashed changes
             with open('Data/contact.json') as f:
                 data = json.load(f)
             try:
