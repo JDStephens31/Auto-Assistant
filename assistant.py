@@ -19,6 +19,7 @@ def talk(text):
     engine.say(text)
     engine.runAndWait()
 
+
 # Call get_response when needing additional user input via speaking
 def get_response():
     try:
@@ -31,6 +32,7 @@ def get_response():
     except NameError:
         print("An exception occurred")
     return feed
+
 
 # Gets initial command
 def take_command():
@@ -46,6 +48,7 @@ def take_command():
     except NameError:
         print("An exception occurred")
     return cmd
+
 
 # Alexa
 def run_alexa():

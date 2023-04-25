@@ -1,10 +1,12 @@
 import random
 import openai
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # OpenAI Initialization
-openai.organization = "org-vxtFFnnBThf1eKODPmnmi6R3"
-openai.api_key = "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"
+openai.organization = os.getenv("OPENAI_ORG")
+openai.api_key = os.getenv("OPENAI_KEY")
 
 
 def new_chat(prompt):
