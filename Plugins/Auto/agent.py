@@ -2,20 +2,22 @@ import os
 from langchain.agents import Tool, AgentExecutor, LLMSingleActionAgent
 from langchain import SerpAPIWrapper, LLMChain
 from langchain.chat_models import ChatOpenAI
-from langchain.memory import ChatMessageHistory, ConversationBufferMemory
-from typing import List, Union
-from langchain.schema import AgentAction, AgentFinish, HumanMessage
-import re
+from langchain.memory import ConversationBufferMemory
 from Commands import sign_up as su
 import promptGen as pg
 from dotenv import load_dotenv
 
-history = ChatMessageHistory()
+# Ability to access ENV files
 load_dotenv()
+
+# Setting up API Keys for Langchain
 os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_KEY")
 os.environ['SERPAPI_API_KEY'] = os.getenv("SERPAPI_API_KEY")
 
+# Adds ability to search
 search = SerpAPIWrapper()
+
+# Agent Tools
 tools = [
     Tool(
         name="Search",
@@ -39,6 +41,7 @@ tools = [
     )
 ]
 
+# Agent Response Template
 template = """{agent_history} Answer the following questions as best you can. You have access to the following tools:
 
 {tools}
@@ -59,24 +62,30 @@ Begin!
 Question: {input}
 {agent_scratchpad}"""
 
-
-prompt = pg.CustomPromptTemplate(
+# Prompt Setup
+prompt = pg.PromptTemplate(
     template=template,
     tools=tools,
     # This omits the `agent_scratchpad`, `tools`, and `tool_names` variables because those are generated dynamically
     # This includes the `intermediate_steps` variable because that is needed
     input_variables=["agent_history", "input", "intermediate_steps"]
 )
+
+
 memory = ConversationBufferMemory(memory_key="agent_history")
-output_parser = pg.CustomOutputParser()
+output_parser = pg.OutputParser()
 llm = ChatOpenAI(temperature=0)
-# LLM chain consisting of the LLM and a prompt
+
 llm_chain = LLMChain(llm=llm, prompt=prompt)
 tool_names = [tool.name for tool in tools]
+
+# Agent Initialization
 agent = LLMSingleActionAgent(
     llm_chain=llm_chain,
     output_parser=output_parser,
     stop=["\nObservation:"],
     allowed_tools=tool_names
 )
+
+# New agent
 agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True, memory=memory)

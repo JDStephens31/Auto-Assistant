@@ -71,7 +71,7 @@ def get_entries(url):
                 confirm_emailXpath = i['params']['confirm_email']['xpath']
                 confirm_email = driver.find_element(By.XPATH, confirm_emailXpath)
                 confirm_email.send_keys(params['email'])
-            if i['params']['captcha']['required'] is True:
+            if i['additional-help'] is True:
                 assistance_required = True
             if i['params']['submit']['required'] is True:
                 if assistance_required:
@@ -80,5 +80,5 @@ def get_entries(url):
                 else:
                     submitXpath = i['params']['submit']['xpath']
                     driver.find_element(By.XPATH, submitXpath).click()
-                    return "Successfully registered"
+                    return "Final Answer:"
         return "Done"

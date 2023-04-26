@@ -20,22 +20,3 @@ Answer: Let's think step by step."""
 prompt = PromptTemplate(template=template, input_variables=["question"])
 llm = OpenAI()
 llm_chain = LLMChain(prompt=prompt, llm=llm)
-
-
-def new_request(userInput):
-    return llm_chain.run(userInput)
-
-
-def write_paper(userInput):
-    number = random.randrange(1, 100)
-    file_name = "paper" + str(number)
-    file_path = "./Assistant Files/" + file_name + ".txt"
-    f = open("./Assistant Files/" + file_name + ".txt", "w+")
-    f.write(llm_chain.run(userInput))
-    f.close()
-    osCommandString = "notepad.exe " + file_path + ""
-    os.system(osCommandString)
-
-
-def autoGTP(userInput):
-    agent_executor.run(userInput)

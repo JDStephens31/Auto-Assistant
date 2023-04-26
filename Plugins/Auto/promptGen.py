@@ -5,7 +5,7 @@ from langchain.schema import AgentAction, AgentFinish, HumanMessage
 import re
 
 
-class CustomPromptTemplate(BaseChatPromptTemplate):
+class PromptTemplate(BaseChatPromptTemplate):
     # The template to use
     template: str
     # The list of tools available
@@ -29,7 +29,7 @@ class CustomPromptTemplate(BaseChatPromptTemplate):
         return [HumanMessage(content=formatted)]
 
 
-class CustomOutputParser(AgentOutputParser):
+class OutputParser(AgentOutputParser):
 
     def parse(self, llm_output: str) -> Union[AgentAction, AgentFinish]:
         # Check if agent should finish

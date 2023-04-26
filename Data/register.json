@@ -44,7 +44,8 @@
         "required": true
       }
     },
-    "confirm-email": false
+    "confirm-email": false,
+    "additional-help": true
   },
   {
     "name": "Gmail",
