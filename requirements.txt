@@ -66,3 +66,5 @@ PyRect~=0.2.0
 wsproto~=1.2.0
 websockets~=11.0.2
 python-dotenv~=1.0.0
+tenacity~=8.2.2
+langchain~=0.0.149

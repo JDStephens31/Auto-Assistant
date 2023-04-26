@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Printify",
+    "url": "https://www.printify.com/",
+    "params": {
+      "email": {
+        "xpath": "//*[@id='email']",
+        "required": true
+      },
+      "password": {
+        "xpath": "//*[@id='password']",
+        "required": true
+      },
+      "first_name": {
+        "xpath": "none",
+        "required": false
+      },
+      "last_name": {
+        "xpath": "none",
+        "required": false
+      },
+      "phone": {
+        "xpath": "none",
+        "required": false
+      },
+      "username": {
+        "xpath": "none",
+        "required": false
+      },
+      "confirm_password": {
+        "xpath": "none",
+        "required": false
+      },
+      "confirm_email": {
+        "xpath": "none",
+        "required": false
+      },
+      "captcha": {
+        "xpath": "none",
+        "required": true
+      },
+      "submit": {
+        "xpath": "/html/body/pfa-app-root/pfa-sign-up/pfa-auth-page/div[1]/div/div[1]/pfy-button",
+        "required": true
+      }
+    },
+    "confirm-email": false
+  },
+  {
+    "name": "Gmail",
+    "url": "https://accounts.google.com/signup/v2/webcreateaccount?biz=false&cc=US&continue=http%3A%2F%2Fsupport.google.com%2Fgoogle-ads%2Fgethelp&dsh=S-1643199930%3A1682020639213371&flowEntry=SignUp&flowName=GlifWebSignIn&hl=en&authuser=0",
+    "params": {
+      "email": {
+        "xpath": "none",
+        "required": false
+      },
+      "password": {
+        "xpath": "//*[@id='passwd']/div[1]/div/div[1]/input",
+        "required": true
+      },
+      "first_name": {
+        "xpath": "//*[@id='firstName']",
+        "required": true
+      },
+      "last_name": {
+        "xpath": "//*[@id='lastName']",
+        "required": true
+      },
+      "phone": {
+        "xpath": "none",
+        "required": false
+      },
+      "username": {
+        "xpath": "//*[@id='username']",
+        "required": true
+      },
+      "confirm_password": {
+        "xpath": "//*[@id='confirm-passwd']/div[1]/div/div[1]/input",
+        "required": true
+      },
+      "confirm_email": {
+        "xpath": "none",
+        "required": false
+      },
+      "captcha": {
+        "xpath": "none",
+        "required": false
+      },
+      "submit": {
+        "xpath": "//*[@id='accountDetailsNext']/div/button/div[3]",
+        "required": true
+      }
+    },
+    "confirm-email": false,
+    "additional-help": true
+  }
+]
