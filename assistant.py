@@ -4,7 +4,7 @@ import pywhatkit
 import speech_recognition as sr
 import speech_recognition.exceptions
 from Commands.message import message
-from Plugins import chatGPT
+from Plugins.Auto import autoAssistant as Auto
 
 # Voice Recognition Initialization
 listener = sr.Recognizer()
@@ -65,7 +65,7 @@ def run_alexa():
 
         # Will ask ChatGPT for information on thing
         elif 'what is' in command:
-            talk(chatGPT.new_chat(command))
+            talk(Auto.new_request(command))
 
         # Will return time
         elif 'time' in command:
@@ -77,11 +77,11 @@ def run_alexa():
             message(command, talk, get_response)
         # Will tell a joke
         elif 'joke' in command:
-            chatGPT.getJoke(command)
+            talk(Auto.new_request(command))
 
         # Will write a paper based on your parameters and store/open the file when done
         elif 'write a paper' in command:
-            chatGPT.write_paper(command)
+            Auto.write_paper(command)
 
         # Did not understand
         else:
