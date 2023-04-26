@@ -20,11 +20,11 @@ params = {
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(options=options, executable_path=path)
 assistance_required = False
 
 
 def start(url):
+    driver = webdriver.Chrome(options=options, executable_path=path)
     driver.get(url)
     time.sleep(3)
     driver.find_element(By.PARTIAL_LINK_TEXT, "up" or "register").click()

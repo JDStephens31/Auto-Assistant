@@ -1,8 +1,8 @@
 import os
+import random
 from selenium import webdriver
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
-from agent import agent_executor
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,12 +21,19 @@ llm = OpenAI()
 llm_chain = LLMChain(prompt=prompt, llm=llm)
 
 
-def new_request(userInput):
-    return llm_chain.run(userInput)
-
-
-def autoGTP(userInput):
-    agent_executor.run(userInput)
-
-
-agent_executor("Write a paper about the history Mac computers. I want the paper to be 5 paragraphs.")
+def savePaper(agentInput):
+    inp = agentInput
+    file_name = "researchData.txt"
+    file_path = "Agent Workspace\\" + file_name
+    f = open(file_path, "r+")
+    text = f.read()
+    f.truncate(0)
+    number = random.randrange(1, 100)
+    file_name = "paper" + str(number) + ".txt"
+    file_path = "Agent Workspace\\" + file_name
+    f = open(file_path, "w")
+    f.write(text)
+    f.close()
+    osCommandString = "notepad.exe " + file_path + ""
+    os.system(osCommandString)
+    return "Final Answer: Paper has been added to " + file_path + "."

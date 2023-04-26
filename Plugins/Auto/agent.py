@@ -4,6 +4,9 @@ from langchain import SerpAPIWrapper, LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from Commands import sign_up as su
+from Commands import savePaper as sp
+from Commands import research as r
+from Commands import compilePaper as c
 import promptGen as pg
 from dotenv import load_dotenv
 
@@ -38,11 +41,29 @@ tools = [
                     "previous link that was opened and should have"
                     "'https://' at the beginning. For example, 'https://printify.com' would be the input for the link "
                     "printify.com."
+    ),
+    Tool(
+        name="Research Paper",
+        func=r.research,
+        description="useful when researching a topic for a paper. Th input to this tool should be research topics. "
+                    "This tool gives 1 paragraph of information each time. Once the amount of paragraphs are "
+                    "satisfied; the next step is to 'compile the paper'"
+    ),
+    Tool(
+        name="Compile the Paper",
+        func=c.compilePaper,
+        description="useful when fixing a research paper's grammar and making it into coherent paper. This tool does "
+                    "not take an input."
+    ),
+    Tool(
+        name="Save Paper",
+        func=sp.savePaper,
+        description="useful when saving a paper."
     )
 ]
 
 # Agent Response Template
-template = """{agent_history} Answer the following questions as best you can. You have access to the following tools:
+template = """Answer the following questions as best you can. You have access to the following tools:
 
 {tools}
 
@@ -58,7 +79,7 @@ Thought: I now know the final answer
 Final Answer: the final answer to the original input question
 
 Begin!
-
+{agent_history} 
 Question: {input}
 {agent_scratchpad}"""
 
@@ -70,7 +91,6 @@ prompt = pg.PromptTemplate(
     # This includes the `intermediate_steps` variable because that is needed
     input_variables=["agent_history", "input", "intermediate_steps"]
 )
-
 
 memory = ConversationBufferMemory(memory_key="agent_history")
 output_parser = pg.OutputParser()
